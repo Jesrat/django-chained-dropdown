@@ -24,13 +24,13 @@
                 var dynUrl = "{% url 'subcategories-filtered' 0 %}";
                 $('#subcategories').empty();
                 $.ajax({
-                        type: "GET",
-                        url: dynUrl.replace('0', category.value),
-                        success: function(opts){
-                            $.each(opts, function(i, opt) {
-                                $('#subcategories').append('<option value="' + opt['id'] + '">' + opt['name'] + '</option>');
-                            });
-                        }
+                    type: "GET",
+                    url: dynUrl.replace('0', category.value),
+                    success: function(opts){
+                        $.each(opts, function(i, opt) {
+                            $('#subcategories').append('<option value="' + opt['id'] + '">' + opt['name'] + '</option>');
+                        });
+                    }
                 });
             }
         </script>
