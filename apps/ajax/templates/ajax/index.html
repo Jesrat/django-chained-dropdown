@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <title>Title</title>
+</head>
+<body>
+    <div style="position:absolute; left: 46%; top:30%;">
+        <select name="categories" id="categories" onchange="populate(this)">
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <br>
+        <select name="subcategories" id="subcategories">
+            {% for subcategory in subcategories %}
+                <option value="{{ subcategory.id }}">{{ subcategory.name }}</option>
+            {% endfor %}
+        </select>
+        <script>
+            function populate(category){
+                var dynUrl = "{% url 'subcategories-filtered' 0 %}";
+                $('#subcategories').empty();
+                $.ajax({
+                        type: "GET",
+                        url: dynUrl.replace('0', category.value),
+                        success: function(opts){
+                            $.each(opts, function(i, opt) {
+                                $('#subcategories').append('<option value="' + opt['id'] + '">' + opt['name'] + '</option>');
+                            });
+                        }
+                });
+            }
+        </script>
+    </div>
+</body>
+</html>
