@@ -1,8 +1,8 @@
-from django.shortcuts import render
-from rest_framework import generics
-from .models import *
+from .models import Category, SubCategory
 from .serializers import SubCategoriesSerializer
+from django.shortcuts import render
 from django.views.generic.edit import View
+from rest_framework import generics
 
 
 # Create your views here.
